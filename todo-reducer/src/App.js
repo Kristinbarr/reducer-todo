@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 import './components/Todo.css'
@@ -21,17 +21,12 @@ const todoData = [
   }
 ]
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      list: todoData
-    }
-  }
+const App = () => {
+  const [list, setList] = useState(todoData)
 
-  toggleItem = (id) => {
-    this.setState({
-      list: this.state.list.map((item) => {
+  const toggleItem = (id) => {
+    setList(
+      list.map((item) => {
         if (item.id === id) {
           return {
             ...item,
@@ -39,40 +34,34 @@ class App extends React.Component {
           }
         } else return item
       })
-    })
+    )
   }
 
-  addItem = (taskName) => {
+  const addItem = (taskName) => {
     const newTask = {
       task: taskName,
       id: Date.now(),
       completed: false
     }
-    this.setState({
-      list: [...this.state.list, newTask]
-    })
+    setList([...list, newTask])
   }
 
-  clearCompleted = () => {
+  const clearCompleted = () => {
     // console.log('before', this.state.list)
-    this.setState({
-      list: this.state.list.filter((item) => item.completed === false)
-    })
+    setList(list.filter((item) => item.completed === false))
   }
 
-  render() {
-    return (
-      <div className='app'>
-        <h2>Welcome to your Todo List!</h2>
-        <TodoForm addItem={this.addItem} />
-        <TodoList
-          list={this.state.list}
-          toggleItem={this.toggleItem}
-          clearCompleted={this.clearCompleted}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className='app'>
+      <h2>Welcome to your Todo List!</h2>
+      <TodoForm addItem={addItem} />
+      <TodoList
+        list={list}
+        toggleItem={toggleItem}
+        clearCompleted={clearCompleted}
+      />
+    </div>
+  )
 }
 
 export default App
