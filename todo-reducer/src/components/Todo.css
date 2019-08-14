@@ -10,7 +10,7 @@ body {
 body {
   text-align: center;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  background-color: #2d2d37;
+  background-color: #303069;
 }
 
 h1,
@@ -40,12 +40,12 @@ form {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  padding: 1rem;
-  background-color: tan;
+  padding: 0.5rem;
+  color: white;
 }
 
 input {
-  padding: .5rem;
+  padding: 0.5rem;
   margin: 1rem;
   border: 2px solid rosybrown;
   border-radius: 5px;
@@ -55,7 +55,7 @@ button {
   border-radius: 5px;
   background-color: blanchedalmond;
   border: 2px solid rosybrown;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
 }
 
