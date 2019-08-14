@@ -1,54 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 import './components/Todo.css'
 
-const todoData = [
-  {
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  },
-  {
-    task: 'Wash Car',
-    id: 1528817084359,
-    completed: false
-  }
-]
+import { listReducer, initialState } from './reducers/listReducer'
 
 const App = () => {
-  const [list, setList] = useState(todoData)
-
+  const [state, dispatch] = useReducer(listReducer, initialState)
   const toggleItem = (id) => {
-    setList(
-      list.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            completed: !item.completed
-          }
-        } else return item
-      })
-    )
+    dispatch({ type: 'TOGGLE_ITEM', payload: id })
   }
 
-  const addItem = (taskName) => {
-    const newTask = {
-      task: taskName,
-      id: Date.now(),
-      completed: false
-    }
-    setList([...list, newTask])
+  const addItem = (task) => {
+    dispatch({ type: 'SUBMIT_ITEM', payload: task })
   }
 
   const clearCompleted = () => {
-    // console.log('before', this.state.list)
-    setList(list.filter((item) => item.completed === false))
+    dispatch({ type: 'CLEAR_COMPLETED' })
   }
 
   return (
@@ -56,7 +24,7 @@ const App = () => {
       <h2>Welcome to your Todo List!</h2>
       <TodoForm addItem={addItem} />
       <TodoList
-        list={list}
+        list={state.list}
         toggleItem={toggleItem}
         clearCompleted={clearCompleted}
       />

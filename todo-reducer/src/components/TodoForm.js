@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
 const TodoForm = (props) => {
-  console.log('props', props)
-  const [item, setItem] = useState('')
+  const [task, setItem] = useState('')
 
   const handleChange = (e) => {
     setItem(e.target.value)
@@ -10,14 +9,14 @@ const TodoForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.addItem(item)
+    props.addItem(task)
     setItem('')
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <label>NEW TODO:</label>
-      <input type='text' value={item} name='item' onChange={handleChange} />
+      <input type='text' value={task} name='task' onChange={handleChange} />
       <button>Add</button>
     </form>
   )
