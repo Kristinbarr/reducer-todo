@@ -7,6 +7,7 @@ import { listReducer, initialState } from './reducers/listReducer'
 
 const App = () => {
   const [state, dispatch] = useReducer(listReducer, initialState)
+  
   const toggleItem = (id) => {
     dispatch({ type: 'TOGGLE_ITEM', payload: id })
   }
